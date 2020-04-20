@@ -1,0 +1,196 @@
+# INTERFACES #
+interface User {
+  firstName: String!
+  lastName: String!
+  avatar: String
+  joinDate: String
+  lastLogin: String!
+}
+
+#CUSTOM TYPES#
+type Quote {
+  firstName: String!
+  lastName: String!
+  service: String!
+  phone: String!
+  message: String!
+}
+
+type Message {
+  name: String!
+  email: String!
+  subject: String!
+  message: String!
+}
+
+type Project {
+  name: String!
+  link: String!
+  image: String!
+  description: String!
+}
+
+type TeamMember {
+  firstName: String!
+  lastName: String!
+  avatar: String!
+  description: String!
+  role: String!
+}
+
+type Admin implements User {
+  firstName: String!
+  lastName: String!
+  avatar: String
+  joinDate: String
+  lastLogin: String!
+  email: String!
+}
+
+type BlogPost {
+  id: ID!
+  author: Admin!
+  title: String!
+  image: String!
+  content: String!
+}
+
+#ROOT TYPES#
+
+#QUERY
+type Query {
+  #PROJECT
+  getProjects: [Project]!
+  getProject(id: ID!): Project!
+
+  #TEAM MEMBER
+  getTeamMembers: [TeamMember]!
+  getTeamMember(id: ID!): TeamMember!
+
+  #ADMIN
+  getAdmins: [Admin]!
+  getAdmin(id: ID!): Admin!
+
+  #BLOG POST
+  getBlogPosts: [BlogPost]!
+  getBlogPost(id: ID!): BlogPost!
+}
+
+#MUTATION
+type Mutation {
+  #QUOTE
+  requestQuote(quoteInput: QuoteInput): Quote!
+
+  #MESSAGE
+  sendContactUsMessage(messageInput: ContactUsMessageInput): Message!
+
+  #NEWSLETTER
+  addToNewsletterList(email: String!): String
+  unsubscribeFromNewsletter(email: String!): String
+
+  #PROJECT
+  deleteProject(id: ID!): Project!
+  updateProject(updateProjectInput: UpdateProjectInput!): Project!
+  createProject(projectInput: ProjectInput!): Project!
+
+  #TEAM MEMBER
+  deleteTeamMember(id: ID!): TeamMember!
+  updateTeamMember(updateTeamMemberInput: UpdateTeamMemberInput!): TeamMember!
+  createTeamMember(teamMemberInput: TeamMemberInput!): TeamMember!
+
+  #ADMIN
+  deleteAdmin(id: ID!): Admin!
+  updateAdmin(updateAdminInput: UpdateAdminInput!): Admin!
+  createAdmin(adminInput: AdminInput!): Admin!
+
+  #BLOG POST
+  deleteBlogPost(id: ID!): BlogPost!
+  updateBlogPost(blogPostUpdateInput: BlogPostUpdateInput!): BlogPost!
+  createBlog(blogPostInput: BlogPostInput!): BlogPost!
+}
+
+#INPUT TYPES
+input QuoteInput {
+  firstName: String!
+  lastName: String!
+  service: String!
+  phone: String!
+  message: String!
+}
+
+input ContactUsMessageInput {
+  name: String!
+  email: String!
+  subject: String!
+  message: String!
+}
+
+input UpdateProjectInput {
+  id: ID!
+  name: String!
+  link: String!
+  image: String!
+  description: String!
+}
+
+input ProjectInput {
+  name: String!
+  link: String!
+  image: String!
+  description: String!
+}
+
+input UpdateTeamMemberInput {
+  id: ID!
+  firstName: String
+  lastName: String
+  avatar: String
+  description: String
+  role: String
+}
+
+input TeamMemberInput {
+  firstName: String!
+  lastName: String!
+  avatar: String!
+  description: String!
+  role: String!
+}
+
+input UpdateAdminInput {
+  id: ID!
+  firstName: String
+  lastName: String
+  avatar: String
+  joinDate: String
+  email: String
+  password: String
+}
+
+input AdminInput {
+  firstName: String!
+  lastName: String!
+  avatar: String
+  joinDate: String!
+  email: String!
+  password: String!
+}
+
+input BlogPostUpdateInput {
+  id: ID!
+  update: BlogPostUpdate!
+}
+
+input BlogPostUpdate {
+  title: String
+  image: String
+  content: String
+  updatedAt: String!
+}
+
+input BlogPostInput {
+  title: String!
+  author: ID
+  image: String!
+  content: String!
+}

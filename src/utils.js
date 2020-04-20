@@ -1,5 +1,13 @@
 const mongoose = require("mongoose");
-const { User } = require("./models");
+const {
+    Quote,
+    Message,
+    Newsletter,
+    Project,
+    TeamMember,
+    Admin,
+    Blog,
+    User } = require("./models");
 
 const createStore = () => {
     let MONGO_URI = "";
@@ -13,16 +21,22 @@ const createStore = () => {
         .connect(MONGO_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
+            useCreateIndex: true,
         })
         .then(() => console.log("DB Connected"))
         .catch((err) => console.error(err));
 
     return {
         db,
-        User
+        Quote,
+        Message,
+        Newsletter,
+        Project,
+        TeamMember,
+        Admin,
+        Blog,
+        User,
     };
-
-
 };
 
 module.exports = { createStore };
