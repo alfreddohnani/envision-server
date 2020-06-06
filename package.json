@@ -12,7 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "apollo-datasource": "^0.7.0",
-    "apollo-server": "^2.12.0",
+    "apollo-server": "^2.14.2",
     "dotenv": "^8.2.0",
     "graphql": "^15.0.0",
     "mongoose": "^5.9.7"
